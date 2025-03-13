@@ -1,0 +1,67 @@
+# 阿里云效流水线配置文件
+version: 1.0
+
+# 定义阶段和任务
+stages:
+  - name: 构建
+    tasks:
+      - name: 构建网站
+        type: build
+        # 使用Node.js环境
+        runtime:
+          name: nodejs
+          version: 16
+        # 构建命令
+        commands:
+          - npm install
+          - npm run build
+        # 构建产物
+        artifacts:
+          - name: website
+            path:
+              - ./dist
+
+  - name: 部署
+    tasks:
+      - name: 部署到OSS
+        type: deploy
+        # 部署到OSS
+        runtime:
+          name: oss
+        # 部署配置
+        params:
+          # 替换为您的OSS配置
+          region: oss-cn-beijing
+          bucket: huasheng-website
+          # 构建产物路径
+          source: ./dist
+          # OSS目标路径
+          target: /
+          # 是否开启CDN加速
+          cdn: true
+
+# 触发器配置
+triggers:
+  push:
+    branches:
+      include:
+        - main
+        - master
+
+# 环境变量配置
+variables:
+  # 可以在此处添加环境变量
+  NODE_ENV: production
+
+# 通知配置
+notifications:
+  # 构建成功通知
+  success:
+    - type: dingtalk
+      # 替换为您的钉钉机器人webhook
+      webhook: https://oapi.dingtalk.com/robot/send?access_token=xxx
+  # 构建失败通知
+  failure:
+    - type: dingtalk
+      # 替换为您的钉钉机器人webhook
+      webhook: https://oapi.dingtalk.com/robot/send?access_token=xxx

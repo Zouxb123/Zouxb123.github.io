@@ -49,18 +49,18 @@ const products = [
       <!-- 产品详情 -->
       <div class="space-y-24">
         {products.map((product, index) => (
-          <div>
+          <div data-aos="fade-up" data-aos-duration="800" data-aos-delay={index * 150}>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-              <div>
-                <h2 class="text-3xl font-bold mb-4">{product.title}</h2>
+              <div data-aos="fade-right" data-aos-duration="1000">
+                <h2 class="text-3xl font-bold mb-4 relative inline-block after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-1 after:bg-accent hover:after:w-full after:transition-all after:duration-500">{product.title}</h2>
                 <p class="text-gray-600 dark:text-gray-300 mb-6">
                   {product.description}
                 </p>
                 
-                <h3 class="text-xl font-bold mb-3">主要特点</h3>
+                <h3 class="text-xl font-bold mb-3 text-accent">主要特点</h3>
                 <ul class="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-300 mb-6">
-                  {product.features.map(feature => (
-                    <li>{feature}</li>
+                  {product.features.map((feature, i) => (
+                    <li data-aos="fade-up" data-aos-delay={i * 50} class="transition-all duration-300 hover:translate-x-2">{feature}</li>
                   ))}
                 </ul>
                 
@@ -73,7 +73,7 @@ const products = [
                 <img 
                   src={product.image} 
                   alt={product.title} 
-                  class="w-full h-auto rounded-lg shadow-lg" 
+                  class="w-full h-auto rounded-lg shadow-lg"
                 />
               </div>
             </div>
@@ -92,7 +92,7 @@ const products = [
           除了标准产品外，华晟复材还提供定制化解决方案，根据客户的具体需求设计和制造专用设备。
         </p>
         <div class="text-center">
-          <a href="/contact" class="inline-block bg-white text-primary hover:bg-gray-100 px-6 py-2 rounded-lg transition-colors font-bold">
+          <a href="/contact" class="inline-block bg-white text-primary px-6 py-2 rounded-lg font-bold">
             联系我们咨询
           </a>
         </div>
