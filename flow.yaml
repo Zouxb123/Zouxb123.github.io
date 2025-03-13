@@ -10,7 +10,7 @@ stages:
         # 使用Node.js环境
         runtime:
           name: nodejs
-          version: 16
+          version: "16.20.0"
         # 构建命令
         commands:
           - npm cache clean --force
