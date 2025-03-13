@@ -13,6 +13,7 @@ stages:
           version: 16
         # 构建命令
         commands:
+          - npm cache clean --force
           - npm install
           - npm run build
         # 构建产物
